@@ -1,21 +1,23 @@
 from flask import Flask, request
-import awsmanager.py
+from awsmanager import blog
 
 
 app = Flask(__name__)
+t1=blog()
 
 ### Posting 
 ### Comment
 ### Viewing 
 
 
-@app.route('/posting', methods=["POST"])
+@app.route('/posting')
 def posting():
-    if request.method == "POST":
-        Content = request.form['Content']
-        Username = request.form['Username']
-        
-    return postingID
+    t1.put(UserName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
+    # if request.method == "POST":
+    #     Content = request.form['Content']
+    #     Username = request.form['Username']
+
+    #return postingID
    
 
 @app.route('/comment', methods=["POST"])

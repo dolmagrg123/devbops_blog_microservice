@@ -19,7 +19,7 @@ class blog:
         response = self.table.put_item(
             Item = {
                 self.Primary_Column_Name:last_primary_key,
-                self.columns[0]: userName,
+                self.columns[0]: UserName,
                 self.columns[1] : UserID,
                 self.columns[2] : BlogTitle,
                 self.columns[3] : BlogDescription
@@ -31,5 +31,5 @@ class blog:
         )
 
         print(response["ResponseMetadata"]["HTTPStatusCode"])
-t1=blog()
-t1.put(userName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
+# t1=blog()
+# t1.put(UserName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
