@@ -1,27 +1,35 @@
 import boto3
 
-client = boto3.client('dynamodb')
-DB = boto3.resource('dynamodb')
 
 
-__TableName__ = "BlogDB"
-Primary_Column_Name = 'PostID'
-Primary_Key = 1
-colums = ["UserName","UserID","BlogTitle","BlogDescription"]
+class blog:
+    def __init__(self):
+        self.__Tablename__ = "BlogDB"
+        self.client = boto3.client('dynamodb')
+        self.DB = boto3.resource('dynamodb')
+        self.Primary_Column_Name = "PostID"
+        self.Primary_key = 1
+        self.columns = ["UserName","UserID","BlogTitle","BlogDescription"]
+        self.table = self.DB.Table(self.__Tablename__)
 
-table = DB.Table(__TableName__)
+    def put(self, UserName, UserID, BlogTitle, BlogDescription):
+        all_items = self.table.scan()
+        last_primary_key = len(all_items['Items']) + 1
 
-
-
-#### How to get the data from tables
-response = table.put_item (
+        response = self.table.put_item(
             Item = {
-                Primary_Column_Name:Primary_Key,
-                colums[0]:'test',
-                colums[1]:'test',
-                colums[2]:'test',
-                colums[3]:'test'
-            }
-)
+                self.Primary_Column_Name:last_primary_key,
+                self.columns[0]: userName,
+                self.columns[1] : UserID,
+                self.columns[2] : BlogTitle,
+                self.columns[3] : BlogDescription
+                
+                
 
-# response["Item"]
+
+            }
+        )
+
+        print(response["ResponseMetadata"]["HTTPStatusCode"])
+t1=blog()
+t1.put(userName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
