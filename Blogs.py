@@ -1,24 +1,27 @@
 from flask import Flask, request
 from awsmanager import blog
 
-
+blog = Blogs()
 app = Flask(__name__)
-t1=blog()
 
-### Posting 
+
+### Blog 
 ### Comment
 ### Viewing 
 
 
-@app.route('/posting', methods=['POST'])
-def posting():
-    t1.put(UserName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
+@app.route('/createBlog', methods=['POST'])
+def create():
+    event.put(BlogName = "LMTD"  BlogDate = "January 1st", BlogTime = "9am", User = "Class", BlogDescription = "Enjoyed the event", BlogImage = "N/A", BlogLocation = "Slack")
+    
+    
+    #t1.put(UserName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
     # if request.method == "POST":
     #     Content = request.form['Content']
     #     Username = request.form['Username']
 
     #return postingID
-    return "OK"
+    #return "OK"
 
 @app.route('/comment', methods=["POST"])
 def comment():
@@ -28,7 +31,7 @@ def comment():
     #commentID = UUID()
     #each blog content a unique ID
     status= aws.saveComment(commentID, blogID, comment)
-    #return  commentID
+    #return  commentIDclear
     return "OK"
 
 
