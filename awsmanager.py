@@ -89,7 +89,7 @@ class Blog:
         )
 
         if response["Items"]:
-    #         # TODO: use update_item insetad of put_item
+    #         # ###### TODO: use update_item insetad of put_item
             #self.Primary_key = response["Items"][0]["blogID"]
             self.Primary_key = response["Items"][0]["blogID"]
             res = self.table.update_item(
