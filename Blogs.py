@@ -50,9 +50,8 @@ def updateBlog():
     blogcontent = res['New_BlogContent']
     blogimage = res['New_BlogImage']
     bloglocation = res['New_BlogLocation']
-    blogcomment = res['New_BlogComment']
-
-    res = blog.put(blogID=blogID, BlogName=New_blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
+    
+    res = blog.put(blogID=blogID, BlogName=New_blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation)
     return res
 
 
