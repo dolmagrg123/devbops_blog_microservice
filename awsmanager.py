@@ -1,12 +1,11 @@
 import boto3
 from boto3.dynamodb.conditions import Attr 
-​
-​
+
 #Using DevBops_blog
 #Columns are : "BlogName", "BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
-​
-# Response template:
+​#
+###Response template:
 #return {
 #                "Result": False or True,
 #                "Error": None or errorMessage,
@@ -89,7 +88,7 @@ class Blog:
         )
 ​
         if response["Items"]:
-    #         # ###### TODO: use update_item insetad of put_item
+             # ###### TODO: use update_item insetad of put_item
             #self.Primary_key = response["Items"][0]["blogID"]
             self.Primary_key = response["Items"][0]["blogID"]
             res = self.table.update_item(
@@ -172,7 +171,7 @@ if __name__ == "__main__":
     #res = blog.put(BlogName="test1234", BlogDate="OCT 4,2020", BlogTime="3 pm", UserID="Sadika C", BlogContent="coding", BlogImage="img", BlogLocation="NY", BlogComment={})
     
     #for update post
-    res = blog.update_blog(BlogID=1, New_BlogName="new_update", New_BlogDate='OCT 08, 2020', New_BlogTime='3 PM', New_BlogContent='update working',  New_BlogImage="img", New_BlogLocation="NY")
+    #res = blog.update_blog(BlogID=1, New_BlogName="new_update", New_BlogDate='OCT 08, 2020', New_BlogTime='5 PM', New_BlogContent='update working1',  New_BlogImage="img", New_BlogLocation="NY")
     
     # for delete
     #res = blog.delete(3)
