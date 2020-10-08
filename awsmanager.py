@@ -1,11 +1,8 @@
 import boto3
 from boto3.dynamodb.conditions import Attr 
-​
-​
 #Using DevBops_blog
 #Columns are : "BlogName", "BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
-​
 # Response template:
 #return {
 #                "Result": False or True,
@@ -13,9 +10,6 @@ from boto3.dynamodb.conditions import Attr
 #                "Description": "",
 #                "BlogID": None or blogID
 #            }
-​
-​
-​
 class Blog:
     def __init__(self):
         self.__Tablename__ = "DevBops_blog"
@@ -25,7 +19,6 @@ class Blog:
         self.Primary_key = 1
         self.columns = ["BlogName", "BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
         self.table = self.DB.Table(self.__Tablename__)
-​
     def put(self, BlogName, BlogDate, BlogTime, UserID, BlogContent, BlogImage, BlogLocation, BlogComment):
         
         # cehck if blog exists, if exists, then immediately return false
@@ -37,11 +30,9 @@ class Blog:
                 "Description": "Blog name already exists",
                 "BlogID": None
             }
-​
         
         all_items = self.table.scan()
         last_primary_key = len(all_items['Items']) +1
-​
         response = self.table.put_item(
             Item = {
                 self.Primary_Column_Name:last_primary_key,
@@ -55,7 +46,6 @@ class Blog:
                 self.columns[7] : BlogComment
             }
         )
-​
         if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
             return {
                 "Result": True,
@@ -71,7 +61,6 @@ class Blog:
                 "Description": "Database error",
                 "BlogID": None
            } 
-​
     def check_blog_exists(self, BlogName):
         response = self.table.scan(
             FilterExpression=Attr("BlogName").eq(BlogName)
@@ -81,13 +70,11 @@ class Blog:
             return True
         else:
             return False
-​
     def update_blog(self, BlogID, New_BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogImage, New_BlogLocation ):
         
         response = self.table.scan(
             FilterExpression=Attr("blogID").eq(BlogID)
         )
-​
         if response["Items"]:
     #         # ###### TODO: use update_item insetad of put_item
             #self.Primary_key = response["Items"][0]["blogID"]
@@ -110,7 +97,6 @@ class Blog:
                  
             )
             return res
-​
             if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
                 return {
                     "Result": True,
@@ -118,7 +104,6 @@ class Blog:
                     "Description": "Blog was updated succesfully",
                 
                     "BlogID": None
-​
                 }
             else:
                 return {
@@ -129,16 +114,11 @@ class Blog:
                 } 
         else:
             return {
-​
                 "Result": False,
                 "Error": "Blog not found",
                 "Description": "Cannot updated",
                 "BlogID": None
-​
             }
-        
-​
-​
     def delete(self, BlogID):
         response = self.table.scan(
             FilterExpression=Attr("blogID").eq(BlogID)
@@ -148,7 +128,6 @@ class Blog:
              res = self.table.delete_item(
                  Key={
                      self.Primary_Column_Name:self.Primary_key
-​
                  }
              )
              return {
@@ -165,7 +144,6 @@ class Blog:
     def view(self):
         res = self.table.scan()
         return res['Items']
-​
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
@@ -179,4 +157,3 @@ if __name__ == "__main__":
     
     # for view
     #res = blog.view()
-​
