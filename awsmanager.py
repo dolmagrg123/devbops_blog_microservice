@@ -92,30 +92,32 @@ class Blog:
     #         # TODO: use update_item insetad of put_item
             #self.Primary_key = response["Items"][0]["blogID"]
             self.Primary_key = response["Items"][0]["blogID"]
-            res = self.table.put_item(
-                    #Key={'blogID' :blogID
-            #             'BlogName':New_BlogName
-            #             'BlogDate':New_BlogDate
-            #             'BlogTime':New_BlogTime
-            #             'BlogContent':New_BlogContent
-            #             'BlogImage':New_BlogImage
-            #             'BlogLocation':New_BlogLocation
+            res = self.table.update_item(
+                Key={
+                    'blogID' :blogID,
+                    'BlogName':New_BlogName,
+                    'BlogDate':New_BlogDate,
+                    'BlogTime':New_BlogTime,
+                    'BlogContent':New_BlogContent,
+                    'BlogImage':New_BlogImage,
+                    'BlogLocation':New_BlogLocation
                         
-            #         }
-            # UpdateEpression ="set blogContent=:c",
-            # ExpressionAttributeValues={
-            #         ':c':New_BlogContent
-            #     },
+                },
+                UpdateEpression ="set BlogContent=:c",
+                ExpressionAttributeValues={
+                    ':c':New_BlogContent
+                    
+                 },
                 
-                    Item = {
-                        self.Primary_Column_Name:self.Primary_key,
-                        self.columns[0]: New_BlogName,
-                        self.columns[1] : New_BlogDate,
-                        self.columns[2] : New_BlogTime,
-                        self.columns[3] : New_BlogContent,
-                        self.columns[4] : New_BlogImage,
-                        self.columns[5] : New_BlogLocation
-                      }
+                    # Item = {
+                    #     self.Primary_Column_Name:self.Primary_key,
+                    #     self.columns[0]: New_BlogName,
+                    #     self.columns[1] : New_BlogDate,
+                    #     self.columns[2] : New_BlogTime,
+                    #     self.columns[3] : New_BlogContent,
+                    #     self.columns[4] : New_BlogImage,
+                    #     self.columns[5] : New_BlogLocation
+                    #   }
                  
             )
 
@@ -177,10 +179,10 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="Proj1", BlogDate="OCT 7,2020", BlogTime="10 pm", UserID="Sadi", BlogContent="code", BlogImage="img", BlogLocation="NY", BlogComment={})
+    #res = blog.put(BlogName="test1234", BlogDate="OCT 4,2020", BlogTime="3 pm", UserID="Sadika C", BlogContent="coding", BlogImage="img", BlogLocation="NY", BlogComment={})
     
     #for update post
-    #res = blog.update_blog(BlogID=2, New_BlogName="LMTD", New_BlogDate='Nov 6, 2020', New_BlogTime='3 PM', New_BlogContent='testing update',  New_BlogImage="img", New_BlogLocation="NY")
+    #res = blog.update_blog(BlogID=1, New_BlogName="LMTD", New_BlogDate='Nov 6, 2020', New_BlogTime='3 PM', New_BlogContent='testing update',  New_BlogImage="img", New_BlogLocation="NY")
     
     # for delete
     #res = blog.delete(3)
