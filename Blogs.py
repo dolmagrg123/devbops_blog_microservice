@@ -1,27 +1,68 @@
 from flask import Flask, request
-from awsmanager import blog
+from awsmanager import Blog
 
-blog = Blogs()
+blog = Blog()
 app = Flask(__name__)
+
+
+
 
 
 ### Blog 
 ### Comment
 ### Viewing 
 
+{
+    "BlogName": {blogname}, 
+    "BlogDate": {date}, 
+    "BlogTime": {time}, 
+    "UserID": {userid}, 
+    "BlogContent": {content}, 
+    "BlogImage": {img},  # img will be a base64 encoding string
+    "BlogLocation": {location}, 
+    "BlogComment": {{dict}}
+}
 
 @app.route('/createBlog', methods=['POST'])
 def create():
-    event.put(BlogName = "LMTD"  BlogDate = "January 1st", BlogTime = "9am", User = "Class", BlogDescription = "Enjoyed the event", BlogImage = "N/A", BlogLocation = "Slack")
-    
-    
-    #t1.put(UserName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
-    # if request.method == "POST":
-    #     Content = request.form['Content']
-    #     Username = request.form['Username']
+    res = request.json
+    blogname = res['BlogName']
+    blogdate = res['BlogData']
+    blogtime = res['BlogTime']
+    userid = res['UserID']
+    blogcontent = res['BlogContent']
+    blogimage = res['BlogImage']
+    bloglocation = res['BlogLocation']
+    blogcomment = res['BlogComment']
 
-    #return postingID
-    #return "OK"
+    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
+
+    print(res) ## only here for debugging
+    return res
+
+@app.route('/update', methods=['POST'])
+def updateBlog():
+    res = request.json
+    blogname = res['BlogName']
+    blogdate = res['BlogData']
+    blogtime = res['BlogTime']
+    userid = res['UserID']
+    blogcontent = res['BlogContent']
+    blogimage = res['BlogImage']
+    bloglocation = res['BlogLocation']
+    blogcomment = res['BlogComment']
+
+    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
+    return res
+
+
+
+@app.route('/delete', methods=['POST'])
+def deleteBlog():
+    req = request.json
+    blogID = req['BlogID']
+    res = blog.delete(blogID)
+    return res
 
 @app.route('/comment', methods=["POST"])
 def comment():
@@ -37,8 +78,8 @@ def comment():
 
 @app.route('/viewing', methods=["GET"])
 def viewing():
-    content = aws.getAllPost()
-    return content 
+    res = blog.view()
+    return res
 
 
 
