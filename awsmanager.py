@@ -29,18 +29,18 @@ class Blog:
     def put(self, BlogName, BlogDate, BlogTime, UserID, BlogContent, BlogImage, BlogLocation, BlogComment):
         
         # cehck if blog exists, if exists, then immediately return false
-        if(self.check_if_blog_exists(BlogName)):
+        if(self.check_blog_exists(BlogName)):
             # immediately return false
             return {
                 "Result": False,
-                "Error": "Blog was not created",
+                "Error": "Blog was created",
                 "Description": "Blog name already exists",
                 "BlogID": None
             }
 
         
         all_items = self.table.scan()
-        last_primary_key = len(all_items['Items']) + 1
+        last_primary_key = len(all_items['Items']) +1
 
         response = self.table.put_item(
             Item = {
@@ -61,16 +61,8 @@ class Blog:
                 "Result": True,
                 "Error": None,
                 "Description": "Blog was created succesfully",
-                #"Primary_key": last_primary_key,
-                # "BlogName": BlogName,
-                # "BlogDate":  BlogDate,
-                # "BlogTime":  BlogTime,
-                # "User": User,
-                # "BlogDescription": BlogDescription,
-                # "BlogImage":  BlogImage,
-                # "BlogLocation": BlogLocation
                 "BlogID": last_primary_key
-
+        
             }
         else:
            return {
@@ -80,7 +72,7 @@ class Blog:
                 "BlogID": None
            } 
 
-    def check_if_blog_exists(self, BlogName):
+    def check_blog_exists(self, BlogName):
         response = self.table.scan(
             FilterExpression=Attr("BlogName").eq(BlogName)
         )
@@ -97,32 +89,33 @@ class Blog:
         )
 
         if response["Items"]:
-            # TODO: use update_item insetad of put_item
+    #         # TODO: use update_item insetad of put_item
+            #self.Primary_key = response["Items"][0]["blogID"]
             self.Primary_key = response["Items"][0]["blogID"]
-            res = self.table.update_item(
-            Key={'blogID' : blogID
-                    # 'BlogName': New_BlogName
-                    # 'BlogDate':New_BlogDate
-                    # 'BlogTime':New_BlogTime
-                    # 'BlogContent':New_BlogContent
-                    # 'BlogImage':New_BlogImage
-                    # 'BlogLocation':New_BlogLocation
-                         
-            }
-            UpdateEpression ="set blogContent=:c",
-            ExpressionAttributeValues={
-                ':c':New_BlogContent
-            },
+            res = self.table.put_item(
+                    #Key={'blogID' :blogID
+            #             'BlogName':New_BlogName
+            #             'BlogDate':New_BlogDate
+            #             'BlogTime':New_BlogTime
+            #             'BlogContent':New_BlogContent
+            #             'BlogImage':New_BlogImage
+            #             'BlogLocation':New_BlogLocation
+                        
+            #         }
+            # UpdateEpression ="set blogContent=:c",
+            # ExpressionAttributeValues={
+            #         ':c':New_BlogContent
+            #     },
                 
-                    # Item = {
-                    #     self.Primary_Column_Name:self.Primary_key,
-                    #     self.columns[0]: New_BlogName,
-                    #     self.columns[1] : New_BlogDate,
-                    #     self.columns[2] : New_BlogTime,
-                    #     self.columns[3] : New_BlogContent,
-                    #     self.columns[4] : New_BlogImage,
-                    #     self.columns[5] : New_BlogLocation
-                    #  }
+                    Item = {
+                        self.Primary_Column_Name:self.Primary_key,
+                        self.columns[0]: New_BlogName,
+                        self.columns[1] : New_BlogDate,
+                        self.columns[2] : New_BlogTime,
+                        self.columns[3] : New_BlogContent,
+                        self.columns[4] : New_BlogImage,
+                        self.columns[5] : New_BlogLocation
+                      }
                  
             )
 
@@ -138,9 +131,9 @@ class Blog:
             else:
                 return {
                     "Result": False,
-                        "Error": "Database error",
-                        "Description": "Database error",
-                        "BlogID": None
+                    "Error": "Database error",
+                    "Description": "Database error",
+                    "BlogID": None
                 } 
         else:
             return {
@@ -177,23 +170,20 @@ class Blog:
                 "Error": "Blog does not exists"
             }
     
-#print(response["ResponseMetadata"]["HTTPStatusCode"])
-# t1=blog()
-# t1.put(UserName='Sadi', UserID='123', BlogTitle="blog", BlogDescription="devbop")
     def view(self):
         res = self.table.scan()
         return res['Items']
 
 if __name__ == "__main__":
     blog = Blog()
-    # for create new post
-    #res = blog.put(BlogName="test2", BlogDate="123", BlogTime="123", UserID="haoran", BlogContent="test", BlogImage="img", BlogLocation="NY", BlogComment={})
+    #for create new post
+    #res = blog.put(BlogName="Proj1", BlogDate="OCT 7,2020", BlogTime="10 pm", UserID="Sadi", BlogContent="code", BlogImage="img", BlogLocation="NY", BlogComment={})
     
-    for update post
-    res = blog.update_blog(BlogID=12093024, New_BlogName="LMTD", New_BlogDate='rightnow', New_BlogTime='asdf', New_BlogContent='testing update',  New_BlogImage="img", New_BlogLocation="NY")
+    #for update post
+    #res = blog.update_blog(BlogID=2, New_BlogName="LMTD", New_BlogDate='Nov 6, 2020', New_BlogTime='3 PM', New_BlogContent='testing update',  New_BlogImage="img", New_BlogLocation="NY")
     
     # for delete
-    #res = blog.delete(1)
+    #res = blog.delete(3)
     
     # for view
     #res = blog.view()

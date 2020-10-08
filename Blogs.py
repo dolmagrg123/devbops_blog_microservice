@@ -43,16 +43,16 @@ def create():
 @app.route('/update', methods=['POST'])
 def updateBlog():
     res = request.json
-    blogname = res['BlogName']
-    blogdate = res['BlogData']
-    blogtime = res['BlogTime']
-    userid = res['UserID']
-    blogcontent = res['BlogContent']
-    blogimage = res['BlogImage']
-    bloglocation = res['BlogLocation']
-    blogcomment = res['BlogComment']
+    blogID= res['blogID']
+    blogname = res['New_BlogName']
+    blogdate = res['New_BlogData']
+    blogtime = res['New_BlogTime']
+    blogcontent = res['New_BlogContent']
+    blogimage = res['New_BlogImage']
+    bloglocation = res['New_BlogLocation']
+    blogcomment = res['New_BlogComment']
 
-    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
+    res = blog.put(blogID=blogID, BlogName=New_blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
     return res
 
 
@@ -64,6 +64,7 @@ def deleteBlog():
     res = blog.delete(blogID)
     return res
 
+### NEED TO WORK ON COMMENT ###
 @app.route('/comment', methods=["POST"])
 def comment():
     comment = request.form['Comment']
