@@ -36,7 +36,7 @@ class Blog:
             }
         
         all_items = self.table.scan()
-        last_primary_key = len(all_items['Items']) +5
+        last_primary_key = len(all_items['Items']) +1
         response = self.table.put_item(
             Item = {
                 self.Primary_Column_Name:last_primary_key,
