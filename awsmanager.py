@@ -19,9 +19,9 @@ class Blog:
         self.__Tablename__ = "DevBops_blog"
         self.client = boto3.client('dynamodb')
         self.DB = boto3.resource('dynamodb')
-        self.Primary_Column_Name = "blogID"
-        self.Primary_key = 1
-        self.columns = ["BlogName", "BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
+        self.Primary_Column_Name = "blogName"
+        self.Primary_key = "blogName"
+        self.columns = ["BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
         self.table = self.DB.Table(self.__Tablename__)
     def put(self, BlogName, BlogDate, BlogTime, UserID, BlogContent, BlogImage, BlogLocation, BlogComment):
         
@@ -30,24 +30,26 @@ class Blog:
             # immediately return false
             return {
                 "Result": False,
-                "Error": "Blog was already created",
+                "Error": "Blog cannot be created",
                 "Description": "Blog name already exists",
-                "BlogID": None
+                "BlogName": None
             }
         
-        all_items = self.table.scan()
-        last_primary_key = len(all_items['Items']) +1
+        # all_items = self.table.scan()
+        # last_primary_key = len(all_items['Items']) +1
+      
+
         response = self.table.put_item(
             Item = {
-                self.Primary_Column_Name:last_primary_key,
-                self.columns[0]: BlogName,
-                self.columns[1] : BlogDate,
-                self.columns[2] : BlogTime,
-                self.columns[3] : UserID,
-                self.columns[4] : BlogContent,
-                self.columns[5] : BlogImage,
-                self.columns[6] : BlogLocation,
-                self.columns[7] : BlogComment
+                self.Primary_Column_Name:BlogName,
+                # self.columns[0]: BlogName,
+                self.columns[0] : BlogDate,
+                self.columns[1] : BlogTime,
+                self.columns[2] : UserID,
+                self.columns[3] : BlogContent,
+                self.columns[4] : BlogImage,
+                self.columns[5] : BlogLocation,
+                self.columns[6] : BlogComment
             }
         )
         if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
@@ -55,7 +57,7 @@ class Blog:
                 "Result": True,
                 "Error": None,
                 "Description": "Blog was created succesfully",
-                "BlogID": last_primary_key
+                "BlogName": BlogName
         
             }
         else:
@@ -63,34 +65,34 @@ class Blog:
                "Result": False,
                 "Error": "Database error",
                 "Description": "Database error",
-                "BlogID": None
+                "BlogName": None
            } 
     def check_blog_exists(self, BlogName):
         response = self.table.scan(
-            FilterExpression=Attr("BlogName").eq(BlogName)
+            FilterExpression=Attr("blogName").eq(BlogName)
         )
         if response["Items"]:
             # We found blog already exists
             return True
         else:
             return False
-    def update_blog(self, BlogID, New_BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogImage, New_BlogLocation ):
+    def update_blog(self, BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogImage, New_BlogLocation ):
         
         response = self.table.scan(
-            FilterExpression=Attr("blogID").eq(BlogID)
+            FilterExpression=Attr("blogName").eq(BlogName)
         )
         if response["Items"]:
              # ###### TODO: use update_item insetad of put_item
             #self.Primary_key = response["Items"][0]["blogID"]
-            self.Primary_key = response["Items"][0]["blogID"]
+            # self.Primary_key = response["Items"][0]["blogName"]
             res = self.table.update_item(
                 Key={
-                    'blogID' :BlogID,   
+                    'blogName' :BlogName,   
                         
                 },
-               UpdateExpression="set BlogName=:n, BlogDate=:d, BlogTime=:t, BlogImage=:i, BlogLocation=:l, BlogContent=:c",
+               UpdateExpression="set BlogDate=:d, BlogTime=:t, BlogImage=:i, BlogLocation=:l, BlogContent=:c",
                ExpressionAttributeValues={
-                    ':n': New_BlogName,
+                    # ':n': New_BlogName,
                     ':d': New_BlogDate,
                     ':t': New_BlogTime,
                     ':i': New_BlogImage,
@@ -107,28 +109,28 @@ class Blog:
                     "Error": None,
                     "Description": "Blog was updated succesfully",
                 
-                    "BlogID": None
+                    "BlogName": None
                 }
             else:
                 return {
                     "Result": False,
                     "Error": "Database error",
                     "Description": "Database error",
-                    "BlogID": None
+                    "BlogName": None
                 } 
         else:
             return {
                 "Result": False,
                 "Error": "Blog not found",
                 "Description": "Cannot updated",
-                "BlogID": None
+                "BlogName": None
             }
-    def delete(self, BlogID):
+    def delete(self, BlogName):
         response = self.table.scan(
-            FilterExpression=Attr("blogID").eq(BlogID)
+            FilterExpression=Attr("blogName").eq(BlogName)
         )
         if response["Items"]:
-             self.Primary_key = response["Items"][0]["blogID"]
+             self.Primary_key = response["Items"][0]["blogName"]
              res = self.table.delete_item(
                  Key={
                      self.Primary_Column_Name:self.Primary_key
@@ -151,14 +153,14 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="Almost there", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="testingcodeV2", BlogImage="img", BlogLocation="NY", BlogComment={"MAYBE"})
-    
+    res = blog.put(BlogName="One", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY", BlogComment="None")
+    res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserID="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY", BlogComment="None")
     #for update post
-    #res = blog.update_blog(BlogID=1, New_BlogName="updating", New_BlogDate='OCT 09, 2020', New_BlogTime='8 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
+    #res = blog.update_blog(BlogName="One", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
     
     # for delete
-    #res = blog.delete(3)
+    #res = blog.delete("One")
     
     # for view
-    #res = blog.view()
+    res = blog.view()
 print (res)
