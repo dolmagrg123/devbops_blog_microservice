@@ -37,7 +37,7 @@ def create():
 
     res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
 
-    print(res) ## only here for debugging
+    #print(res) ## only here for debugging
     return res
 
 @app.route('/update', methods=['POST'])
