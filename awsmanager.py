@@ -23,7 +23,7 @@ class Blog:
         self.Primary_key = "blogName"
         self.columns = ["BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
         self.table = self.DB.Table(self.__Tablename__)
-    def put(self, BlogName, BlogDate, BlogTime, UserID, BlogContent, BlogImage, BlogLocation, BlogComment):
+    def put(self, BlogName, BlogDate, BlogTime, UserID, BlogContent, BlogImage, BlogLocation,BlogComment):
         
         # cehck if blog exists, if exists, then immediately return false
         if(self.check_blog_exists(BlogName)):
@@ -200,8 +200,8 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="Four", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY")
-    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserID="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY", BlogComment="None")
+    #res = blog.put(BlogName="Five", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY",BlogComment=[])
+    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserID="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY",BlogComment=[])
     #for update post
     #res = blog.update_blog(BlogName="One", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
     
@@ -212,6 +212,8 @@ if __name__ == "__main__":
     #res = blog.view()
     
     # for comment
-    res=blog.add_comment("Four","Comment2")
+    # res=blog.add_comment("Four","Comment3")
+    res=blog.add_comment("Three","NewComment")
+    res=blog.add_comment("Three","Comment2")
     
 print (res)
