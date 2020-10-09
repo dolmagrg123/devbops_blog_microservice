@@ -151,10 +151,10 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    res = blog.put(BlogName="chan", BlogDate="OCT 5,2020", BlogTime="3 pm", UserID="Chandler", BlogContent="coding", BlogImage="img", BlogLocation="NY", BlogComment={})
+    #res = blog.put(BlogName="Almost there", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="testingcodeV2", BlogImage="img", BlogLocation="NY", BlogComment={"MAYBE"})
     
     #for update post
-    #res = blog.update_blog(BlogID=1, New_BlogName="new_update", New_BlogDate='OCT 08, 2020', New_BlogTime='5 PM', New_BlogContent='update working1',  New_BlogImage="img", New_BlogLocation="NY")
+    #res = blog.update_blog(BlogID=1, New_BlogName="updating", New_BlogDate='OCT 09, 2020', New_BlogTime='8 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
     
     # for delete
     #res = blog.delete(3)
