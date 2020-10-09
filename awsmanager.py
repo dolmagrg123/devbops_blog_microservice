@@ -30,13 +30,13 @@ class Blog:
             # immediately return false
             return {
                 "Result": False,
-                "Error": "Blog was created",
+                "Error": "Blog was already created",
                 "Description": "Blog name already exists",
                 "BlogID": None
             }
         
         all_items = self.table.scan()
-        last_primary_key = len(all_items['Items']) +1
+        last_primary_key = len(all_items['Items']) +5
         response = self.table.put_item(
             Item = {
                 self.Primary_Column_Name:last_primary_key,
@@ -151,7 +151,7 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="test1234", BlogDate="OCT 4,2020", BlogTime="3 pm", UserID="Sadika C", BlogContent="coding", BlogImage="img", BlogLocation="NY", BlogComment={})
+    res = blog.put(BlogName="chan", BlogDate="OCT 5,2020", BlogTime="3 pm", UserID="Chandler", BlogContent="coding", BlogImage="img", BlogLocation="NY", BlogComment={})
     
     #for update post
     #res = blog.update_blog(BlogID=1, New_BlogName="new_update", New_BlogDate='OCT 08, 2020', New_BlogTime='5 PM', New_BlogContent='update working1',  New_BlogImage="img", New_BlogLocation="NY")
@@ -161,3 +161,4 @@ if __name__ == "__main__":
     
     # for view
     #res = blog.view()
+print (res)
