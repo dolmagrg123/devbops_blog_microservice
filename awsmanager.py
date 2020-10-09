@@ -48,7 +48,7 @@ class Blog:
                 self.columns[2] : UserID,
                 self.columns[3] : BlogContent,
                 self.columns[4] : BlogImage,
-                self.columns[5] : BlogLocation,
+                self.columns[5] : BlogLocation,  
                 self.columns[6] : BlogComment
             }
         )
@@ -150,11 +150,58 @@ class Blog:
     def view(self):
         res = self.table.scan()
         return res['Items']
+    
+    def add_comment(self, BlogName, New_Comment):
+        response = self.table.scan(
+            FilterExpression=Attr("blogName").eq(BlogName)
+        )
+        if response["Items"]:
+             # ###### TODO: use update_item insetad of put_item
+            #self.Primary_key = response["Items"][0]["blogID"]
+            # self.Primary_key = response["Items"][0]["blogName"]
+            res = self.table.update_item(
+                Key={
+                    'blogName' :BlogName,   
+                        
+                },
+            
+               UpdateExpression="set BlogComment= list_append(BlogComment, :i)",
+               ExpressionAttributeValues={
+                   ':i': [New_Comment],
+                },
+                ReturnValues="UPDATED_NEW"
+                 
+            )
+            return res
+            if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
+                return {
+                    "Result": True,
+                    "Error": None,
+                    "Description": "Blog was updated succesfully",
+                
+                    "BlogName": None
+                }
+            else:
+                return {
+                    "Result": False,
+                    "Error": "Database error",
+                    "Description": "Database error",
+                    "BlogName": None
+                } 
+        else:
+            return {
+                "Result": False,
+                "Error": "Blog not found",
+                "Description": "Cannot updated",
+                "BlogName": None
+            }
+
+
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    res = blog.put(BlogName="One", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY", BlogComment="None")
-    res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserID="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY", BlogComment="None")
+    #res = blog.put(BlogName="Four", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY")
+    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserID="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY", BlogComment="None")
     #for update post
     #res = blog.update_blog(BlogName="One", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
     
@@ -162,5 +209,9 @@ if __name__ == "__main__":
     #res = blog.delete("One")
     
     # for view
-    res = blog.view()
+    #res = blog.view()
+    
+    # for comment
+    res=blog.add_comment("Four","Comment2")
+    
 print (res)
