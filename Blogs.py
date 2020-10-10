@@ -9,7 +9,7 @@ app = Flask(__name__)
 #     "BlogName": {blogname}, 
 #     "BlogDate": {date}, 
 #     "BlogTime": {time}, 
-#     "UserID": {userid}, 
+#     "UserName": {username}, 
 #     "BlogContent": {content}, 
 #     "BlogImage": {img},  # img will be a base64 encoding string
 #     "BlogLocation": {location}, 
@@ -21,12 +21,12 @@ def create():
     blogname = res['BlogName']
     blogdate = res['BlogDate']
     blogtime = res['BlogTime']
-    userid = res['UserID']
+    username = res['UserName']
     blogcontent = res['BlogContent']
     blogimage = res['BlogImage']
     bloglocation = res['BlogLocation']
     #blogcomment = res['BlogComment']
-    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=[])
+    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserName=username, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=[])
     #print(res) ## only here for debugging
     return res
 @app.route('/update', methods=['POST'])
