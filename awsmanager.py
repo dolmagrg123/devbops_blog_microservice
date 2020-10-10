@@ -1,11 +1,11 @@
 import boto3
 from boto3.dynamodb.conditions import Attr 
 #Using DevBops_blog
-#Columns are : "BlogName", "BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
+#Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
 # Response template:
 #Using DevBops_blog
-#Columns are : "BlogName", "BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
+#Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
 ###Response template:
 #return {
@@ -21,9 +21,9 @@ class Blog:
         self.DB = boto3.resource('dynamodb')
         self.Primary_Column_Name = "blogName"
         self.Primary_key = "blogName"
-        self.columns = ["BlogDate", "BlogTime", "UserID", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
+        self.columns = ["BlogDate", "BlogTime", "UserName", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
         self.table = self.DB.Table(self.__Tablename__)
-    def put(self, BlogName, BlogDate, BlogTime, UserID, BlogContent, BlogImage, BlogLocation,BlogComment):
+    def put(self, BlogName, BlogDate, BlogTime, UserName, BlogContent, BlogImage, BlogLocation,BlogComment):
         
         # cehck if blog exists, if exists, then immediately return false
         if(self.check_blog_exists(BlogName)):
@@ -45,7 +45,7 @@ class Blog:
                 # self.columns[0]: BlogName,
                 self.columns[0] : BlogDate,
                 self.columns[1] : BlogTime,
-                self.columns[2] : UserID,
+                self.columns[2] : UserName,
                 self.columns[3] : BlogContent,
                 self.columns[4] : BlogImage,
                 self.columns[5] : BlogLocation,  
@@ -200,8 +200,8 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="Five", BlogDate="OCT 8,2020", BlogTime="10 AM", UserID="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY",BlogComment=[])
-    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserID="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY",BlogComment=[])
+    #res = blog.put(BlogName="Five", BlogDate="OCT 8,2020", BlogTime="10 AM", UserName="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY",BlogComment=[])
+    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY",BlogComment=[])
     #for update post
     #res = blog.update_blog(BlogName="One", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
     
