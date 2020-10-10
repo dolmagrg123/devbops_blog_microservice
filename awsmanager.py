@@ -208,7 +208,7 @@ if __name__ == "__main__":
     blog = Blog()
     #for create new post
     #res = blog.put(BlogName="Saturday Live", BlogDate="OCT 10,2020", BlogTime="10 AM", UserName="Dolma", BlogContent="We are Live Today",  BlogLocation="NY",BlogComment={})
-    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new",  BlogLocation="NY",BlogComment=[])
+    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new",  BlogLocation="NY",BlogComment={})
     #for update post
     #res = blog.update_blog(BlogName="Saturday Live", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogLocation="NY")
     
@@ -219,8 +219,8 @@ if __name__ == "__main__":
     #res = blog.view()
     
     # for comment
-    # res=blog.add_comment("Saturday Live","Comment3")
-    # res=blog.add_comment("Saturday Live","NewComment")
-    # res=blog.add_comment("Saturday Live","Comment2")
+    # res=blog.add_comment("Saturday Live","Comment3","Dolma")
+    # res=blog.add_comment("Saturday Live","NewComment","Sadika")
+    # res=blog.add_comment("Saturday Live","Comment2","Chandler")
     
 # print (res)
