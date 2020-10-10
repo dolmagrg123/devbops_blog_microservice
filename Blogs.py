@@ -32,13 +32,13 @@ def create():
 @app.route('/update', methods=['POST'])
 def updateBlog():
     res = request.json
-    blogname = res['New_BlogName']
-    blogdate = res['New_BlogData']
+    blogname = res['blogName']
+    blogdate = res['New_BlogDate']
     blogtime = res['New_BlogTime']
     blogcontent = res['New_BlogContent']
     blogimage = res['New_BlogImage']
     bloglocation = res['New_BlogLocation']
-    res = blog.put(BlogName=New_blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation)
+    res = blog.update_blog(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation)
     return res
 @app.route('/delete', methods=['POST'])
 def deleteBlog():
