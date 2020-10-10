@@ -15,10 +15,10 @@ def create():
     blogtime = res['BlogTime']
     username = res['UserName']
     blogcontent = res['BlogContent']
-    blogimage = res['BlogImage']
+    # blogimage = res['BlogImage']
     bloglocation = res['BlogLocation']
     #blogcomment = res['BlogComment']
-    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserName=username, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment={})
+    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserName=username, BlogContent=blogcontent,BlogLocation=bloglocation, BlogComment={})
     #print(res) ## only here for debugging
     return res
 @app.route('/update', methods=['POST'])
@@ -28,9 +28,9 @@ def updateBlog():
     blogdate = res['New_BlogDate']
     blogtime = res['New_BlogTime']
     blogcontent = res['New_BlogContent']
-    blogimage = res['New_BlogImage']
+    # blogimage = res['New_BlogImage']
     bloglocation = res['New_BlogLocation']
-    res = blog.update_blog(BlogName=blogname, New_BlogDate=blogdate, New_BlogTime=blogtime, New_BlogContent=blogcontent,  New_BlogImage=blogimage, New_BlogLocation=bloglocation)
+    res = blog.update_blog(BlogName=blogname, New_BlogDate=blogdate, New_BlogTime=blogtime, New_BlogContent=blogcontent,  New_BlogLocation=bloglocation)
     return res
 @app.route('/delete', methods=['POST'])
 def deleteBlog():
