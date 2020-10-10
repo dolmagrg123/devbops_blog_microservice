@@ -1,11 +1,11 @@
 import boto3
 from boto3.dynamodb.conditions import Attr 
 #Using DevBops_blog
-#Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
+#Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
 # Response template:
 #Using DevBops_blog
-#Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"
+#Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
 ###Response template:
 #return {
@@ -21,9 +21,9 @@ class Blog:
         self.DB = boto3.resource('dynamodb')
         self.Primary_Column_Name = "blogName"
         self.Primary_key = "blogName"
-        self.columns = ["BlogDate", "BlogTime", "UserName", "BlogContent", "BlogImage", "BlogLocation", "BlogComment"]
+        self.columns = ["BlogDate", "BlogTime", "UserName", "BlogContent", "BlogLocation", "BlogComment"]
         self.table = self.DB.Table(self.__Tablename__)
-    def put(self, BlogName, BlogDate, BlogTime, UserName, BlogContent, BlogImage, BlogLocation,BlogComment):
+    def put(self, BlogName, BlogDate, BlogTime, UserName, BlogContent, BlogLocation,BlogComment):
         
         # cehck if blog exists, if exists, then immediately return false
         if(self.check_blog_exists(BlogName)):
@@ -47,9 +47,8 @@ class Blog:
                 self.columns[1] : BlogTime,
                 self.columns[2] : UserName,
                 self.columns[3] : BlogContent,
-                self.columns[4] : BlogImage,
-                self.columns[5] : BlogLocation,  
-                self.columns[6] : BlogComment
+                self.columns[4] : BlogLocation,  
+                self.columns[5] : BlogComment
             }
         )
         if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
@@ -76,7 +75,7 @@ class Blog:
             return True
         else:
             return False
-    def update_blog(self, BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogImage, New_BlogLocation):
+    def update_blog(self, BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogLocation):
         
         response = self.table.scan(
             FilterExpression=Attr("blogName").eq(BlogName)
@@ -90,12 +89,11 @@ class Blog:
                     'blogName' :BlogName,   
                         
                 },
-               UpdateExpression="set BlogDate=:d, BlogTime=:t, BlogImage=:i, BlogLocation=:l, BlogContent=:c",
+               UpdateExpression="set BlogDate=:d, BlogTime=:t, BlogLocation=:l, BlogContent=:c",
                ExpressionAttributeValues={
                     # ':n': New_BlogName,
                     ':d': New_BlogDate,
                     ':t': New_BlogTime,
-                    ':i': New_BlogImage,
                     ':l': New_BlogLocation,
                     ':c': New_BlogContent
                 }
@@ -209,10 +207,10 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="Saturday Live", BlogDate="OCT 10,2020", BlogTime="10 AM", UserName="Dolma", BlogContent="We are Live Today", BlogImage="img", BlogLocation="NY",BlogComment=[])
-    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY",BlogComment=[])
+    #res = blog.put(BlogName="Saturday Live", BlogDate="OCT 10,2020", BlogTime="10 AM", UserName="Dolma", BlogContent="We are Live Today",  BlogLocation="NY",BlogComment={})
+    #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new",  BlogLocation="NY",BlogComment=[])
     #for update post
-    #res = blog.update_blog(BlogName="Saturday", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
+    #res = blog.update_blog(BlogName="Saturday Live", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogLocation="NY")
     
     # for delete
     #res = blog.delete("Saturday")
