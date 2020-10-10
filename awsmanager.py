@@ -213,7 +213,7 @@ if __name__ == "__main__":
     
     # for comment
     # res=blog.add_comment("Four","Comment3")
-    res=blog.add_comment("Three","NewComment")
-    res=blog.add_comment("Three","Comment2")
+    #res=blog.add_comment("Three","NewComment")
+    #res=blog.add_comment("Three","Comment2")
     
-print (res)
+#print (res)
