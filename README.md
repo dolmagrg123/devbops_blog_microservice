@@ -2,7 +2,7 @@
 
 # Primary Key = BlogName
 
-## Create Blog
+### Create Blog
     for /createBlog ,
  {   
     "BlogName": {blogname}, 
