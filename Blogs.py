@@ -25,8 +25,8 @@ def create():
     blogcontent = res['BlogContent']
     blogimage = res['BlogImage']
     bloglocation = res['BlogLocation']
-    blogcomment = res['BlogComment']
-    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=blogcomment)
+    #blogcomment = res['BlogComment']
+    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserID=userid, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=[])
     #print(res) ## only here for debugging
     return res
 @app.route('/update', methods=['POST'])
