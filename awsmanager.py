@@ -207,6 +207,7 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
+    #res = blog.put(BlogName="BlogService", BlogDate="OCT 10,2020", BlogTime="1 PM", UserName="Sadika", BlogContent="Almost There",  BlogLocation="NY",BlogComment={})
     #res = blog.put(BlogName="Saturday Live", BlogDate="OCT 10,2020", BlogTime="10 AM", UserName="Dolma", BlogContent="We are Live Today",  BlogLocation="NY",BlogComment={})
     #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new",  BlogLocation="NY",BlogComment={})
     #for update post
@@ -219,6 +220,7 @@ if __name__ == "__main__":
     #res = blog.view()
     
     # for comment
+    #res=blog.add_comment("Learning","Comment1","Sadika")
     # res=blog.add_comment("Saturday Live","Comment3","Dolma")
     # res=blog.add_comment("Saturday Live","NewComment","Sadika")
     # res=blog.add_comment("Saturday Live","Comment2","Chandler")
