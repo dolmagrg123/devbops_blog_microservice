@@ -137,12 +137,13 @@ class Blog:
              return {
                  "Result": True,
                  "Error": None,
-                 "description": "Blog was deleted"
+                 "Description": "Blog was deleted"
              }
         else:
             return {
                 "Result": False,
-                "Error": "Blog does not exists"
+                "Error": "Blog does not exists",
+                "Description": "Error"
             }
     
     def view(self):
