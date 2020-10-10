@@ -4,17 +4,15 @@
 
 ## Create Blog
     for /createBlog ,
-
-    {
-        "BlogName": {blogname}, 
-        "BlogDate": {date}, 
-        "BlogTime": {time}, 
-        "UserName": {username}, 
-        "BlogContent": {content}, 
-        "BlogImage": {img},  # img will be a base64 encoding string
-        "BlogLocation": {location}, 
-        "BlogComment": {{dict}}
-    }
+ {   
+### "BlogName": {blogname}, 
+    "BlogDate": {date}, 
+    "BlogTime": {time}, 
+    "UserName": {username}, 
+    "BlogContent": {content}, 
+    "BlogLocation": {location}, 
+    "BlogComment": {{dict}}
+ }
 
 Request method type: POST
 
