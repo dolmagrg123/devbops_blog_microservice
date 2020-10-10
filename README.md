@@ -5,7 +5,7 @@
 ## Create Blog
     for /createBlog ,
  {   
-### "BlogName": {blogname}, 
+    "BlogName": {blogname}, 
     "BlogDate": {date}, 
     "BlogTime": {time}, 
     "UserName": {username}, 
