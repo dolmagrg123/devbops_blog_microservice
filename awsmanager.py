@@ -200,20 +200,20 @@ class Blog:
 if __name__ == "__main__":
     blog = Blog()
     #for create new post
-    #res = blog.put(BlogName="Five", BlogDate="OCT 8,2020", BlogTime="10 AM", UserName="Sadika C", BlogContent="NewPrimary", BlogImage="img", BlogLocation="NY",BlogComment=[])
+    #res = blog.put(BlogName="Saturday Live", BlogDate="OCT 10,2020", BlogTime="10 AM", UserName="Dolma", BlogContent="We are Live Today", BlogImage="img", BlogLocation="NY",BlogComment=[])
     #res = blog.put(BlogName="Three", BlogDate="OCT 9,2020", BlogTime="10 AM", UserName="Chandler", BlogContent="Making new", BlogImage="img", BlogLocation="NY",BlogComment=[])
     #for update post
-    #res = blog.update_blog(BlogName="One", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
+    #res = blog.update_blog(BlogName="Saturday", New_BlogDate='OCT 09, 2020', New_BlogTime='5 PM', New_BlogContent='update workingV1',  New_BlogImage="img", New_BlogLocation="NY")
     
     # for delete
-    #res = blog.delete("One")
+    #res = blog.delete("Saturday")
     
     # for view
     #res = blog.view()
     
     # for comment
-    # res=blog.add_comment("Four","Comment3")
-    #res=blog.add_comment("Three","NewComment")
-    #res=blog.add_comment("Three","Comment2")
+    # res=blog.add_comment("Saturday Live","Comment3")
+    # res=blog.add_comment("Saturday Live","NewComment")
+    # res=blog.add_comment("Saturday Live","Comment2")
     
-#print (res)
+# print (res)
