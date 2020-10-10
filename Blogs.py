@@ -3,21 +3,10 @@ from awsmanager import Blog
 blog = Blog()
 app = Flask(__name__)
 ### Blog 
-## Primary Key = BlogName
 ### Comment
 ### Viewing 
 
-## for /creatBlog 
-# {
-#     "BlogName": {blogname}, 
-#     "BlogDate": {date}, 
-#     "BlogTime": {time}, 
-#     "UserName": {username}, 
-#     "BlogContent": {content}, 
-#     "BlogImage": {img},  # img will be a base64 encoding string
-#     "BlogLocation": {location}, 
-#     "BlogComment": {{dict}}
-# }
+
 @app.route('/createBlog', methods=['POST'])
 def create():
     res = request.json

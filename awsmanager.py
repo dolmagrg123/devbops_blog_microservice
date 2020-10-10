@@ -186,7 +186,7 @@ class Blog:
                 return {
                     "Result": True,
                     "Error": None,
-                    "Description": "Blog was updated succesfully",
+                    "Description": "Comment was updated succesfully",
                 
                     "BlogName": None
                 }
@@ -200,7 +200,7 @@ class Blog:
         else:
             return {
                 "Result": False,
-                "Error": "Comment not found",
+                "Error": "Blog not found",
                 "Description": "Cannot add comment",
                 "BlogName": None
             }
