@@ -3,8 +3,7 @@
 # Primary Key = BlogName
 
 ## Create Blog
-Request method type: POST
-    for /createBlog ,
+  for /createBlog ,
  {
     "BlogName": {blogname}, 
      "BlogDate": {date}, 
@@ -16,7 +15,7 @@ Request method type: POST
      "BlogComment": {{dict}}
  }
 
-
+Request method type: POST
 
  # Response will be
 
