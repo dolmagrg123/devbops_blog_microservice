@@ -3,7 +3,7 @@
 # Primary Key = BlogName
 
 ## Create Blog
-  for /createBlog ,
+        for /createBlog ,
  {
     "BlogName": {blogname}, 
      "BlogDate": {date}, 
