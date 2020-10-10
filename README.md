@@ -2,20 +2,16 @@
 
 # Primary Key = BlogName
 
-## Create Blog
-    for /createBlog ,
- {   
-### "BlogName": {blogname}, 
+### Create Blog - Request method type: POST
+    for /createBlog , {   
+    "BlogName": {blogname}, 
     "BlogDate": {date}, 
     "BlogTime": {time}, 
     "UserName": {username}, 
     "BlogContent": {content}, 
     "BlogLocation": {location}, 
-    "BlogComment": {{dict}}
- }
-
-Request method type: POST
-
+    "BlogComment": {{dict}} } 
+###
  # Response will be
 
  {
