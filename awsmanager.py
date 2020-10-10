@@ -76,7 +76,7 @@ class Blog:
             return True
         else:
             return False
-    def update_blog(self, BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogImage, New_BlogLocation ):
+    def update_blog(self, BlogName, New_BlogDate, New_BlogTime, New_BlogContent,  New_BlogImage, New_BlogLocation):
         
         response = self.table.scan(
             FilterExpression=Attr("blogName").eq(BlogName)
@@ -98,11 +98,11 @@ class Blog:
                     ':i': New_BlogImage,
                     ':l': New_BlogLocation,
                     ':c': New_BlogContent
-                },
-                ReturnValues="UPDATED_NEW"
+                }
+                # ReturnValues="UPDATED_NEW"
                  
             )
-            return res
+            #return res
             if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
                 return {
                     "Result": True,
@@ -151,11 +151,14 @@ class Blog:
         res = self.table.scan()
         return res['Items']
     
-    def add_comment(self, BlogName, New_Comment):
+    def add_comment(self, BlogName, New_Comment, UserName):
         response = self.table.scan(
             FilterExpression=Attr("blogName").eq(BlogName)
         )
         if response["Items"]:
+
+# {"user1": "comment", "user2": "comment"}
+
              # ###### TODO: use update_item insetad of put_item
             #self.Primary_key = response["Items"][0]["blogID"]
             # self.Primary_key = response["Items"][0]["blogName"]
@@ -165,14 +168,20 @@ class Blog:
                         
                 },
             
-               UpdateExpression="set BlogComment= list_append(BlogComment, :i)",
+               #UpdateExpression="set BlogComment= list_append(BlogComment, :i)",
+
+               UpdateExpression="SET BlogComment.#username = :comment",
+               ExpressionAttributeNames={
+                   "#username": UserName
+               },
                ExpressionAttributeValues={
-                   ':i': [New_Comment],
-                },
-                ReturnValues="UPDATED_NEW"
+                   ":comment": New_Comment
+               } 
+
+
                  
             )
-            return res
+            #return res
             if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
                 return {
                     "Result": True,

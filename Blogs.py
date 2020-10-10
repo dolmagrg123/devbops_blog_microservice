@@ -3,8 +3,11 @@ from awsmanager import Blog
 blog = Blog()
 app = Flask(__name__)
 ### Blog 
+## Primary Key = BlogName
 ### Comment
 ### Viewing 
+
+## for /creatBlog 
 # {
 #     "BlogName": {blogname}, 
 #     "BlogDate": {date}, 
@@ -26,19 +29,19 @@ def create():
     blogimage = res['BlogImage']
     bloglocation = res['BlogLocation']
     #blogcomment = res['BlogComment']
-    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserName=username, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment=[])
+    res = blog.put(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, UserName=username, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation, BlogComment={})
     #print(res) ## only here for debugging
     return res
 @app.route('/update', methods=['POST'])
 def updateBlog():
     res = request.json
-    blogname = res['blogName']
+    blogname = res['BlogName']
     blogdate = res['New_BlogDate']
     blogtime = res['New_BlogTime']
     blogcontent = res['New_BlogContent']
     blogimage = res['New_BlogImage']
     bloglocation = res['New_BlogLocation']
-    res = blog.update_blog(BlogName=blogname, BlogDate=blogdate, BlogTime=blogtime, BlogContent=blogcontent, BlogImage=blogimage, BlogLocation=bloglocation)
+    res = blog.update_blog(BlogName=blogname, New_BlogDate=blogdate, New_BlogTime=blogtime, New_BlogContent=blogcontent,  New_BlogImage=blogimage, New_BlogLocation=bloglocation)
     return res
 @app.route('/delete', methods=['POST'])
 def deleteBlog():
@@ -51,7 +54,9 @@ def deleteBlog():
 def comment():
     req = request.json
     BlogName = req['BlogName']
-    res = blog.add_comment # Does this work?
+    comment = req['Comment']
+    username = req['UserName']
+    res = blog.add_comment(BlogName=BlogName, New_Comment=comment, UserName=username) # Does this work?
     return res
     ## generate a commentID by using UUID
     #commentID = UUID()
