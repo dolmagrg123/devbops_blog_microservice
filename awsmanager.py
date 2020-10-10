@@ -200,8 +200,8 @@ class Blog:
         else:
             return {
                 "Result": False,
-                "Error": "Blog not found",
-                "Description": "Cannot updated",
+                "Error": "Comment not found",
+                "Description": "Cannot add comment",
                 "BlogName": None
             }
 
