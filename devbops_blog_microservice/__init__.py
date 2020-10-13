@@ -1,5 +1,5 @@
 from flask import Flask, request
-from awsmanager import Blog
+from devbops_blog_microservice.awsmanager import Blog
 blog = Blog()
 app = Flask(__name__)
 ### Blog 
