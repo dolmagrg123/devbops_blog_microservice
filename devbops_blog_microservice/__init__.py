@@ -1,5 +1,5 @@
 from flask import Flask, request
-from awsmanager import Blog
+from devbops_blog_microservice.awsmanager import Blog
 blog = Blog()
 app = Flask(__name__)
 ### Blog 
@@ -52,7 +52,7 @@ def comment():
     #each blog content a unique ID
     #return  commentIDclear
    # return "OK"
-@app.route('/viewing', methods=["GET"])
+@app.route('/view', methods=["GET"])
 def viewing():
     res = blog.view()
     return res

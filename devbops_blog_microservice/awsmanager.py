@@ -148,7 +148,14 @@ class Blog:
     
     def view(self):
         res = self.table.scan()
-        return res['Items']
+
+        return {
+            "Result": True,
+            "Error": None,
+            "Description": "All blog from database",
+            "Blogs": res['Items']
+        }
+        #return res['Items']
     
     def add_comment(self, BlogName, New_Comment, UserName):
         response = self.table.scan(
