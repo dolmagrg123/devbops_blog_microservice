@@ -52,7 +52,7 @@ def comment():
     #each blog content a unique ID
     #return  commentIDclear
    # return "OK"
-@app.route('/viewing', methods=["GET"])
+@app.route('/view', methods=["GET"])
 def viewing():
     res = blog.view()
     return res
