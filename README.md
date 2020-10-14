@@ -1,7 +1,8 @@
 # Devblops_blog_microservice
 
 ## Issue Tracker
- - Token should be in header
+ - Token should be in header (API Gateway)
+ - Comments should have date/time (Backend)
 
 ## Blog Frontend   
      
@@ -18,12 +19,12 @@
 {
     "Token": str <REQUIRED>,
     "Action": str <REQUIRED>,
-    "BlogSubject": str,
-    "BlogBody": str,
-    "Location": str,
-    "Date": str,
-    "Time": str,
-    "Comment": str / null when creating blog
+    "BlogSubject": str / null if action = R ,
+    "BlogBody": str / null if action = R, D, Q ,
+    "Location": str / null if action = R, D, Q ,
+    "Date": str / null if action = R, D, Q ,
+    "Time": str / null if action = R, D, Q,
+    "Comment": str / null if action = C, R, U, D
 }
 ```
  - Response Body
