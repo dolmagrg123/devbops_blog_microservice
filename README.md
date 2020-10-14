@@ -1,80 +1,168 @@
-# Primary Key = BlogName
+# Devblops_blog_microservice
 
-# Create Blog - Request method type: POST
-    FOR /createBlog , {   
-    "BlogName": {blogname}, 
-    "BlogDate": {date}, 
-    "BlogTime": {time}, 
-    "UserName": {username}, 
-    "BlogContent": {content}, 
-    "BlogLocation": {location}, 
-    "BlogComment": {{dict}} 
-    } 
+## Issue Tracker
+ - Token should be in header
 
- ## Response will be
-    { 
-    "BlogName": "dictionary",
-    "Description": "Blog was created succesfully",
-    "Error": null,
-    "Result": true
-     }
+## Blog Frontend   
+     
+### Action: 
+ * `C` for create blog
+ * `R` for retrieve all blogs
+ * `U` for update a blog
+ * `D` for delete a blog
+ * `Q` for adding a comment in a blog
 
-# Update Blog -  Request method type: POST
-    FOR /update,
-    {
-    "BlogName": {blogname}, 
-     "BlogDate": {date}, 
-     "BlogTime": {time}, 
-     "UserName": {username}, 
-     "BlogContent": {content}, 
-     "BlogLocation": {location}, 
-     }
-    
+### Request methods and templates 
+ - Request Body
+```
+{
+    "Token": str <REQUIRED>,
+    "Action": str <REQUIRED>,
+    "BlogSubject": str,
+    "BlogBody": str,
+    "Location": str,
+    "Date": str,
+    "Time": str,
+    "Comment": str / null when creating blog
+}
+```
+ - Response Body
+ ```
+{
+    "statusCode": 200,
+    "Status": boolean,
+    "BlogSubject": str / null,
+    "Error": str / null,
+    "Description": str,
+    "BlogDB": Array of dicts / null
+}
+```
 
-## Response will be 
-    {
-    "BlogName": null,
-    "Description": "Cannot updated",
-    "Error": "Blog not found",
-    "Result": false
-    }
-
-# Delete Blog - Request method type: GET
-    FOR /delete
-    {
-        "BlogName":{blogname}
-    }
-
-## Response will be 
-    {
-    "Error": null,
-    "Result": true,
-    "description": "Blog was deleted"
-    }
-
-# Add Comment - Request method type: POST
-    FOR /comment
-    {
+### Route
+POST to `https://0c77865x10.execute-api.us-east-1.amazonaws.com/v1/blog`
  
-    "BlogName": {blogname},
-    "UserName": {username},
-    "Comment" : {comment}
-    }
+### Examples
+ - Create blog
+ ```
+Request body:
+{
+  "Token": <Token>,
+  "Action": "C",
+  "BlogSubject": "First Blog",
+  "BlogBody": "Hello world",
+  "Location": <Location>,
+  "Date": <Date>,
+  "Time": <Time>,
+  "Comment": null
+}
 
-## Response will be
-    {
-    "BlogName": null,
-    "Description": "Comment was updated succesfully",
-    "Error": null,
-    "Result": true
-    }
+Response body:
+{
+  "statusCode": 200,
+  "Status": <boolean>,
+  "BlogSubject": <Title of the blog you just created>,
+  "Error": str / null,
+  "Description": str
+}
+```
 
-# View Blog - Request method type: GET
-    FOR /view
-    res = blog.view()
-    return res
+ - Update blog:
+```
+Request body:
+{
+  "Token": <Token>,
+  "Action": "U",
+  "BlogSubject": "First Blog",
+  "BlogBody": <Content to be updated>,
+  "Location": <New location>,
+  "Date": <New Date>,
+  "Time": <New Time>,
+  "Comment": null
+}
 
-This is how to view our blog
+Response body:
+{
+  "statusCode": 200,
+  "Status": <boolean>,
+  "BlogSubject": null,
+  "Error": str / null,
+  "Description": str,
+  "BlogsDB": null
+}
+```
 
-   
+ - Delete blog:
+```
+Request body:
+{
+  "Token": <Token>,
+  "Action": "D",
+  "BlogSubject": "First Blog",
+  "BlogBody": null,
+  "Location": null,
+  "Date": null,
+  "Time": null,
+  "Comment": null
+}
 
+Response body:
+{
+  "statusCode": 200,
+  "Status": <boolean>,
+  "BlogSubject": null,
+  "Error": str / null,
+  "Description": str,
+  "BlogsDB": null
+}
+```
+
+ - Add comment to a blog:
+```
+Request body:
+{
+  "Token": <Token>,
+  "Action": "Q",
+  "BlogSubject": "First Blog",
+  "BlogBody": null,
+  "Location": null,
+  "Date": null,
+  "Time": null,
+  "Comment": "Hello this is my first comment"
+}
+
+Response body:
+{
+  "statusCode": 200,
+  "Status": <boolean>,
+  "BlogSubject": null,
+  "Error": str / null,
+  "Description": str,
+  "BlogsDB": null
+}
+```
+
+ - Get all blogs:
+```
+Request body:
+{
+  "Token": <Token>,
+  "Action": "R",
+  "BlogSubject": null,
+  "BlogBody": null,
+  "Location": null,
+  "Date": null,
+  "Time": null,
+  "Comment": null
+}
+
+Response body:
+{
+  "statusCode": 200,
+  "Status": <boolean>,
+  "BlogSubject": null,
+  "Error": str / null,
+  "Description": "All blog from database",
+  "BlogDB": [dicts]
+}
+```
+ 

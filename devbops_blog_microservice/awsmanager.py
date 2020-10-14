@@ -153,7 +153,7 @@ class Blog:
             "Result": True,
             "Error": None,
             "Description": "All blog from database",
-            "Blogs": res['Items']
+            "BlogDB": res['Items']
         }
         #return res['Items']
     
