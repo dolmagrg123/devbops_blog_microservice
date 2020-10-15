@@ -220,12 +220,19 @@ class Blog:
             for d in response:
                 if d['UserName'] == username:
                     lst.append(d)
-        return {
-            "Result": True,
-            "Error": None,
-            "Description": "All blog this user created",
-            "BlogsDB": lst
-        }
+            return {
+                "Result": True,
+                "Error": None,
+                "Description": "All blog this user created",
+                "BlogsDB": lst
+            }
+        else:
+            return {
+                "Result": False,
+                "Error": "No blogs for this user",
+                "Description": "This user haven't post any blogs yet.",
+                "BlogsDB": lst
+            }
 
 if __name__ == "__main__":
     blog = Blog()
