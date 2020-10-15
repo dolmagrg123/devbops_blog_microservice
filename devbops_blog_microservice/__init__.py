@@ -56,5 +56,13 @@ def comment():
 def viewing():
     res = blog.view()
     return res
+
+@app.route('/history', methods=['POST'])
+def history():
+    req = request.json
+    username = req['UserName']
+    res = blog.getAllUserBlog(username)
+    return res
+
 if __name__ == '__main__':
     app.run(debug=True)
