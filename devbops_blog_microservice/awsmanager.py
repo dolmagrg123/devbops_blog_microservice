@@ -1,5 +1,7 @@
 import boto3
-from boto3.dynamodb.conditions import Attr 
+from boto3.dynamodb.conditions import Attr, Key
+
+
 #Using DevBops_blog
 #Columns are : "BlogName", "BlogDate", "BlogTime", "UserName", "BlogContent", "BlogLocation", "BlogComment"
 # BlogCommnet should be a dictionary, key is the userid, value is their comments
@@ -153,7 +155,7 @@ class Blog:
             "Result": True,
             "Error": None,
             "Description": "All blog from database",
-            "Blogs": res['Items']
+            "BlogDB": res['Items']
         }
         #return res['Items']
     
@@ -211,6 +213,26 @@ class Blog:
                 "BlogName": None
             }
 
+    def getAllUserBlog(self, username):
+        response = self.table.scan()['Items']
+        lst = []
+        if len(response) > 0:
+            for d in response:
+                if d['UserName'] == username:
+                    lst.append(d)
+            return {
+                "Result": True,
+                "Error": None,
+                "Description": "All blog this user created",
+                "BlogsDB": lst
+            }
+        else:
+            return {
+                "Result": False,
+                "Error": "No blogs for this user",
+                "Description": "This user haven't post any blogs yet.",
+                "BlogsDB": lst
+            }
 
 if __name__ == "__main__":
     blog = Blog()
@@ -232,5 +254,7 @@ if __name__ == "__main__":
     # res=blog.add_comment("Saturday Live","Comment3","Dolma")
     # res=blog.add_comment("Saturday Live","NewComment","Sadika")
     # res=blog.add_comment("Saturday Live","Comment2","Chandler")
-    
+
+    print(blog.getAllUserBlog('hrgutou2'))
+
 # print (res)
