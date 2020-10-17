@@ -9,7 +9,6 @@
 ### Action: 
  * `C` for create blog
  * `R` for retrieve all blogs
- * `U` for update a blog
  * `D` for delete a blog
  * `Q` for adding a comment in a blog
 
@@ -66,32 +65,7 @@ Response body:
   "Description": str
 }
 ```
-
- - Update blog:
-```
-Request body:
-{
-  "Token": <Token>,
-  "Action": "U",
-  "BlogSubject": "First Blog",
-  "BlogBody": <Content to be updated>,
-  "Location": <New location>,
-  "Date": <New Date>,
-  "Time": <New Time>,
-  "Comment": null
-}
-
-Response body:
-{
-  "statusCode": 200,
-  "Status": <boolean>,
-  "BlogSubject": null,
-  "Error": str / null,
-  "Description": str,
-  "BlogsDB": null
-}
-```
-
+ 
  - Delete blog:
 ```
 Request body:
