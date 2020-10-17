@@ -65,7 +65,11 @@ Response body:
   "Description": str
 }
 ```
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 8ceaf3cecb3de29fa843e0cf1d6cf62499022a21
  - Delete blog:
 ```
 Request body:
