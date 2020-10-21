@@ -1,5 +1,7 @@
 # Devblops_blog_microservice
 
+[![Build Status](http://52.91.9.136:8080/buildStatus/icon?job=BlogMicroservice)](http://52.91.9.136:8080/job/BlogMicroservice/)
+
 ## Issue Tracker
  - Token should be in header (API Gateway)
  - Comments should have date/time (Backend)
