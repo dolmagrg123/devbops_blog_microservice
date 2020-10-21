@@ -257,6 +257,6 @@ if __name__ == "__main__":
     # res=blog.add_comment("Saturday Live","NewComment","Sadika")
     # res=blog.add_comment("Saturday Live","Comment2","Chandler")
 
-    print(blog.getAllUserBlog('hrgutou2'))
+    print(blog.getAllUserBlog('zxcvzcxv'))
 
 # print (res)
