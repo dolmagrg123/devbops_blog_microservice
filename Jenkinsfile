@@ -4,9 +4,9 @@ pipeline {
          stage('build') {
              steps {
                     withEnv(["HOME=${env.WORKSPACE}"]) {
-                         sh 'pip install flask'
-                         sh 'pip install boto3'
-                         sh 'pip install requests'
+                         sh 'python3 -m pip install flask'
+                         sh 'python3 -m pip install boto3'
+                         sh 'python3 -m pip install requests'
 
                      }
                  }
