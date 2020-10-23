@@ -64,5 +64,6 @@ def history():
     res = blog.getAllUserBlog(username)
     return res
 
+
 if __name__ == '__main__':
     app.run(debug=True)
