@@ -1,9 +1,9 @@
 FROM debian:latest
 
-MAINTAINER Sumaiyah, Dolma
+MAINTAINER Sumaiyah and Dolma
 
 RUN apt-get update && apt-get install -y apache2 \
-   libapache2-mod-wsgi \
+   libapache2-mod-wsgi-py3 \
    build-essential \
    python3 \
    python3-dev\
