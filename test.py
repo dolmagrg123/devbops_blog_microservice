@@ -35,7 +35,7 @@ class BasicTestCase(unittest.TestCase):
         data = json.loads(rv.data)
         assert data['Result'] == True
 
-    Result should be false
+#     Result should be false
     def test_3_DUPLICATE_posting(self):
         req = {
             "BlogName": "QATesting",
