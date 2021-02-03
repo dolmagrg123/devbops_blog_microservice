@@ -114,14 +114,14 @@ class BasicTestCase(unittest.TestCase):
         assert data['Result'] == True
 
     # Result should be false
-    def test_10_NONEXIST_deleting(self):
-        req = {
-            "BlogName": "QATesting"
-        }
+#     def test_10_NONEXIST_deleting(self):
+#         req = {
+#             "BlogName": "QATesting"
+#         }
 
-        rv = self.app.post('/delete', json=req)
-        data = json.loads(rv.data)
-        assert data['Result'] == False
+#         rv = self.app.post('/delete', json=req)
+#         data = json.loads(rv.data)
+#         assert data['Result'] == False
 
 
 
