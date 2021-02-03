@@ -1,4 +1,4 @@
-# Devblops blog microservice
+# Devbops blog microservice
 
 [![Build Status](http://52.91.9.136:8080/buildStatus/icon?job=BlogMicroservice)](http://52.91.9.136:8080/job/BlogMicroservice/)
 
