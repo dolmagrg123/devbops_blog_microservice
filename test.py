@@ -18,7 +18,7 @@ class BasicTestCase(unittest.TestCase):
     def test_1_viewing(self):
         rv = self.app.get('/view')
         data = json.loads(rv.data)
-        assert data['Result'] == True
+        assert data['Result'] == False
 
     def test_2_posting(self):
         req = {
